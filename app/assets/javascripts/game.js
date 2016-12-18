@@ -10,9 +10,6 @@ var CardGame = function(targetId) {
   // turn card face down
   var hideCard = function(id) {
     cards[id].innerHTML = '<img src="/assets/back.png">';
-    // with(cards[id].style) {
-    //   WebkitTransform = MozTransform = OTransform = msTransform = "scale(1.0) rotate(180deg)";
-    // }
   };
 
   // move card to pack
@@ -23,7 +20,6 @@ var CardGame = function(targetId) {
       zIndex = "1000";
       top = "100px";
       left = "-140px";
-      // WebkitTransform = MozTransform = OTransform = msTransform = "rotate(0deg)";
       zIndex = "0";
     }
   };
@@ -35,7 +31,6 @@ var CardGame = function(targetId) {
       zIndex = "1000";
       top = cards[id].fromtop + "px";
       left = cards[id].fromleft + "px";
-      // WebkitTransform = MozTransform = OTransform = msTransform = "rotate(180deg)";
       zIndex = "0";
     }
   };
@@ -45,20 +40,9 @@ var CardGame = function(targetId) {
     if(id === card1) return;
     if(cards[id].matched) return;
 
-    //click on card and return value
-    // cards[id].firstChild.src = "//cdn.the-art-of-web.com/images/cards/" + card_value[id] + ".png";
     cards[id].innerHTML = 
       '<div class="card rank-' + card_value[id] + ' spades"> <span class="rank">' + card_value[id][0] + 
       '</span> <span class="suit">&' + getCardSuit(card_value[id][1]) + ';</span></div>';
-// <div class="card rank-7 spades">
-//         <span class="rank">7</span>
-//         <span class="suit">&spades;</span>
-//     </div>
-// "<div class="card rank-3Hspades"> <span class="rank">3</span> <span class="suit">&spades;</span></div>"
-
-    // with(cards[id].style) {
-    //   WebkitTransform = MozTransform = OTransform = msTransform = "scale(1.2) rotate(185deg)";
-    // }
 
     if(card1 !== false) {
       card2 = id;
@@ -107,8 +91,7 @@ var CardGame = function(targetId) {
           })(card1Index, card2Index);
 
           ++matches_found;
-          document.getElementById("matched_counter").innerText = matches_found;
-          document.getElementById("matched_cards").innerText = data.matched_cards;
+          updateMatches(data.matched_cards);
           if(matches_found == card_value.length / 2) {
             alert("Found all Paris, You Win!!")
             // resetGame();
@@ -121,47 +104,39 @@ var CardGame = function(targetId) {
     });
   }
 
+  function updateMatches(matchedCards) {
+    document.getElementById("matched_counter").innerText = matchedCards.length;
+    document.getElementById("matched_cards").innerText = matchedCards;
+  }
+
   function resetGame() {
     matches_found = 0;
     started = false;
     //TOOD : option to start a new game
   }
 
-  function passOutCards() {
-    for(i=0; i < card_value.length; i++) {
-      (function(idx) {
-        setTimeout(function() { moveToPlace(idx); }, idx * 100);
-      })(i);
-    }
-    started = true; 
-  }
-
   function setupCardPosition() {
     var currentTable = $('.table_class').data('table');
     var matchedCards = currentTable["matched_cards"];
-    var matchesFound = matchedCards.length;
+    matches_found = matchedCards.length;
     card_value = currentTable["current_cards"];
     started = currentTable["game_started"];
 
     setupNewGamePosition(card_value);
+    updateMatches(matchedCards);
     //passout cards without timer
     for(i=0; i < card_value.length; i++) {
-      moveToPlace(i);
-    }
-    //remove matched cards from table
-    for (var i=0; i < matchesFound; i++) {
-      var index = card_value.indexOf(matchedCards[i]);
-      (function(idx) {
-        setTimeout(function() { hideCard(index); }, idx * 100);
-      })(i);
-        
+      if(!matchedCards.includes(card_value[i])) {
+        moveToPlace(i);  
+      } else {
+        moveToPack(i);
+      }
     }
   }
 
   function setupNewGamePosition(cardDeck) {
 
     for(var i=0; i < cardDeck.length; i++) {
-        // var newCard = card.cloneNode(true);
         var newCard = document.createElement("div");
         newCard.innerHTML = "<img src=\"/assets/back.png\">";
 
