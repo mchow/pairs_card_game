@@ -40,9 +40,11 @@ var CardGame = function(targetId) {
     if(id === card1) return;
     if(cards[id].matched) return;
 
+    var cardNumber = card_value[id].split(/D|C|S|H/)[0];
+    var suit = getCardSuit(card_value[id]);
     cards[id].innerHTML = 
-      '<div class="card rank-' + card_value[id] + ' spades"> <span class="rank">' + card_value[id][0] + 
-      '</span> <span class="suit">&' + getCardSuit(card_value[id][1]) + ';</span></div>';
+      '<div class="card rank-' + cardNumber.toLowerCase() + ' ' + suit.toLowerCase() + '"> <span class="rank">' + cardNumber + 
+      '</span> <span class="suit">&' + suit + ';</span></div>';
 
     if(card1 !== false) {
       card2 = id;
@@ -55,22 +57,24 @@ var CardGame = function(targetId) {
 
 
   /**
-    get full name of card suit based on a character
+    get css name of card suit based on a capitialized character
 
     @example 
-    input: "D", output: "diamonds" 
+    input: "D", output: "diams" 
   **/
-  function getCardSuit(suitChar) {
+  function getCardSuit(card) {
+    console.log(card);
+    var suitChar = card.replace(/[0-9]|J|Q|K|A/g, '');
     if(suitChar === "D") {
-      return "diamonds"
+      return "diams";
     } else if(suitChar === "C") {
-      return "clubs"
+      return "clubs";
     } else if(suitChar === "H") {
-      return "hearts"
+      return "hearts";
     } else if(suitChar === "S") {
-      return "spades"
+      return "spades";
     } else {
-      return ""
+      return "";
     }
   }
 
