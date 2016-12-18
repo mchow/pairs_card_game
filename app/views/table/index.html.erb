@@ -1,0 +1,49 @@
+
+<html>
+
+<head>
+  <title>Pairing Card Game - 26 pairs</title>
+  <style type="text/css">
+
+  #stage {
+    border: 1px solid #ccc;
+    background-color: #ccc;
+  }
+
+  #felt {
+    position: relative;
+    margin: 0 0 0 200px;
+    height: 500px;
+    background: green;
+  }
+
+  #felt div {
+    position: absolute;
+    /**left: -140px;
+    top: 100px;**/
+  }
+
+  </style>
+  <link rel="stylesheet" type="text/css" href="/assets/cards.css" media="screen">
+</head>
+
+<%= content_tag :div, class: "table_class", data: {table: @Table} do %>
+<% end %>
+
+<body>
+<div class="playingCards">
+	<div id="stage">
+		<div id="matched">
+			Pairs Counter: <div id="matched_counter"> </div>
+			Matched Cards: <div id="matched_cards"> </div>
+		<div>
+	</div>
+</div>
+
+<script type="text/javascript" src="/assets/game.js"></script>
+<script type="text/javascript">
+  var game = new CardGame("stage");
+</script>
+
+</body>
+</html>
