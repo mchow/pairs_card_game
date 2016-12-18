@@ -34,20 +34,6 @@ class TableController < ApplicationController
 	end
 
 	def current_deck
-		# table = current_table(params[:id])
-		# if table.nil?
-		# 	#create new table with ids
-		# 	current_cards = shuffle_cards
-		# 	Table.create({
-		# 		table_id: params[:id],
-		# 		current_cards: shuffle_cards,
-		# 		game_started: false,
-		# 		matched_cards: [] 
-		# 		})
-		# else
-		# 	current_cards = table.current_cards
-		# end
-
 		render json: urrent_table(params[:id]).current_cards
 	end
 
