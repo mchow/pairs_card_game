@@ -25,7 +25,7 @@ class TableController < ApplicationController
 
 		table = current_table(params[:id])
 		# match the first elements
-		if card1[0] == card2[0]
+		if card1.split(/D|C|S|H/)[0] == card2.split(/D|C|S|H/)[0]
 			table[:matched_cards] += [card1,card2]
 			table.update
 		end
@@ -40,7 +40,10 @@ class TableController < ApplicationController
 	# array of cards are denoted facecard and suite in string value 
 	# 1C = one of clubs
 	def shuffle_cards
-		["1C","2C","1H","2H"].shuffle
+		["2C","3C","4C","5C","6C","7C","8C","9C","10C","JC","QC","KC", "AC", \
+			"2C","3C","4C","5C","6C","7C","8C","9C","10C","JC","QC","KC","AC", \
+			"2H","3H","4H","5H","6H","7H","8H","9H","10H","JH","QH","KH","AH", \
+			"2S","3S","4S","5S","6S","7S","8S","9S","10S","JS","QS","KS","AS"].shuffle
 	end
 
 	def current_table(table_id) 

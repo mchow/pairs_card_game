@@ -144,8 +144,8 @@ var CardGame = function(targetId) {
         var newCard = document.createElement("div");
         newCard.innerHTML = "<img src=\"/assets/back.png\">";
 
-        newCard.fromtop = 15 + 120 * Math.floor(i/4);
-        newCard.fromleft = 70 + 100 * (i%4);
+        newCard.fromtop = 15 + 120 * Math.floor(i/9);
+        newCard.fromleft = 70 + 100 * (i%9);
         (function(idx) {
           newCard.addEventListener("click", function() { showCard(idx); }, false);
         })(i);
