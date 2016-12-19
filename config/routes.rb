@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   post 'table/:id/matchcards' => 'table#match_cards'
   post 'table/:id/game_status' => 'table#game_status'
 
+  #for application debugging
+  get 'mark/status' => 'table#app_status'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

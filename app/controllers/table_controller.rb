@@ -56,4 +56,7 @@ class TableController < ApplicationController
 		table.update
 	end
 
+	def app_status
+		render json: Table.all
+	end
 end
