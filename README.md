@@ -1,9 +1,14 @@
 ## Backend : Starting the App
 
-This is a Rails application 
+### Requirements
+	Ruby 2.1.2
+	Mongo DB installed
+
+### Starting local service 
 
 	bundle install
 	rails server
+
 
 ## Using Application
 
