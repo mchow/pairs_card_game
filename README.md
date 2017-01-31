@@ -24,3 +24,4 @@ Replace {id} a number for a new game.
 
 	
 
+pull request test
